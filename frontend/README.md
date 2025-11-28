@@ -1,73 +1,53 @@
-# React + TypeScript + Vite
+# Frontend Setup Guide
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Environment Variables
 
-Currently, two official plugins are available:
+Create a `.env` file in the frontend directory with the following variables:
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
-
-## React Compiler
-
-The React Compiler is currently not compatible with SWC. See [this issue](https://github.com/vitejs/vite-plugin-react/issues/428) for tracking the progress.
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```env
+# Google reCAPTCHA Site Key (Optional)
+# Get your site key from https://www.google.com/recaptcha/admin
+# Leave empty to disable reCAPTCHA during development
+VITE_RECAPTCHA_SITE_KEY=your_site_key_here
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## Getting a ReCAPTCHA Site Key
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+1. Go to [Google reCAPTCHA Admin](https://www.google.com/recaptcha/admin)
+2. Click on the "+" button to create a new site
+3. Fill in the form:
+   - **Label**: Your app name (e.g., "Grievance Management System")
+   - **reCAPTCHA type**: reCAPTCHA v2 → "I'm not a robot" Checkbox
+   - **Domains**: Add `localhost` for development
+4. Accept the terms and submit
+5. Copy the **Site Key** and paste it in your `.env` file
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+## Development Without ReCAPTCHA
+
+The login page will work without ReCAPTCHA if the `VITE_RECAPTCHA_SITE_KEY` is not set or is empty. This is useful for local development and testing.
+
+## Installation
+
+```bash
+npm install
 ```
+
+## Running the Development Server
+
+```bash
+npm run dev
+```
+
+The app will be available at `http://localhost:5173`
+
+## Building for Production
+
+```bash
+npm run build
+```
+
+## Notes
+
+- The `.env` file is git-ignored and should not be committed to version control
+- Make sure to set up the environment variables in your production environment
+- For production, add your production domain to the reCAPTCHA admin console
