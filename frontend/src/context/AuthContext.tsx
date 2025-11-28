@@ -1,5 +1,6 @@
-import { createContext, useContext, useState, useEffect, ReactNode } from 'react';
-import * as authApi from '@/services/authApi';
+import { createContext, useContext, useState, useEffect } from 'react';
+import type { ReactNode } from 'react';
+import { authApi } from '../services/api';
 import Cookies from 'js-cookie';
 
 interface User {
@@ -9,12 +10,17 @@ interface User {
   id: string; // Added id property to User interface
 }
 
+interface SignupResponse {
+  message: string;
+  token?: string;
+}
+
 interface AuthContextType {
   user: User | null;
   isLoading: boolean;
   error: string | null;
   login: (email: string, password: string, role?: 'admin' | 'user', captchaToken?: string) => Promise<boolean>;
-  signup: (name: string, email: string, password: string) => Promise<any>;
+  signup: (name: string, email: string, password: string) => Promise<SignupResponse>;
   logout: () => void;
 }
 
@@ -84,7 +90,7 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
     }
   };
 
-  const signup = async (name: string, email: string, password: string): Promise<any> => {
+  const signup = async (name: string, email: string, password: string): Promise<SignupResponse> => {
     setIsLoading(true);
     setError(null);
     try {
@@ -107,13 +113,16 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
       }
       setIsLoading(false);
       return { message: 'Registration failed. Please try again.' };
-    } catch (error: any) {
+    } catch (error: unknown) {
       console.error('Signup error:', error);
       setError('Registration failed. Please try again.');
       setIsLoading(false);
       // Try to extract backend error message
-      if (error.response && error.response.data && error.response.data.message) {
-        return { message: error.response.data.message };
+      if (error && typeof error === 'object' && 'response' in error) {
+        const axiosError = error as { response?: { data?: { message?: string } } };
+        if (axiosError.response?.data?.message) {
+          return { message: axiosError.response.data.message };
+        }
       }
       return { message: 'Registration failed. Please try again.' };
     }
