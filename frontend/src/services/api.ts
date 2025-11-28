@@ -1,6 +1,5 @@
 import axios from 'axios';
 import Cookies from 'js-cookie';
-import { updateGrievance } from './grievanceService';
 
 // Create an axios instance with default config
 const api = axios.create({

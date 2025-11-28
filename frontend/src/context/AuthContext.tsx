@@ -1,5 +1,5 @@
-import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
-import { authApi } from '@/services/api';
+import { createContext, useContext, useState, useEffect, ReactNode } from 'react';
+import * as authApi from '@/services/authApi';
 import Cookies from 'js-cookie';
 
 interface User {
