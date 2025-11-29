@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { useAuth } from '@/context/AuthContext';
-import MainLayout from '@/components/Layout/MainLayout';
+import { useAuth } from '../context/AuthContext';
+import MainLayout from '../components/Layout/MainLayout';
 import { 
   FileText, 
   ListChecks, 
@@ -19,7 +19,7 @@ import {
   getAllGrievances, 
   getGrievancesByUser 
 } from '@/services/grievanceService';
-import { grievanceApi } from '@/services/api';
+import { grievanceApi } from '../services/api';
 import { useQuery, useQueryClient } from '@tanstack/react-query';
 import {
   Dialog,
@@ -28,9 +28,9 @@ import {
   DialogFooter,
   DialogTitle,
   DialogDescription
-} from '@/components/ui/dialog';
+} from '../components/ui/dialog';
 
-import { useToast } from '@/hooks/use-toast';
+import { useToast } from '../hooks/use-toast';
 
 const Dashboard = () => {
   const { user } = useAuth();  
