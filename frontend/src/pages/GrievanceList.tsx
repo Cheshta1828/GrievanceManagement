@@ -1,11 +1,11 @@
 import React, { useState, useMemo } from 'react';
 import { Link, useSearchParams } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
-import MainLayout from '@/components/Layout/MainLayout';
-import { useAuth } from '@/context/AuthContext';
-import { grievanceApi } from '@/services/api';
-import { GrievanceStatus } from '@/services/grievanceService';
-import { Button } from '@/components/ui/button';
+import MainLayout from '../components/Layout/MainLayout';
+import { useAuth } from '../context/AuthContext';
+import { grievanceApi } from '../services/api';
+import type { GrievanceStatus } from '../services/grievanceService';
+import { Button } from '../components/ui/button';
 import { Search, FileText, Filter } from 'lucide-react';
 
 const GrievanceList = () => {

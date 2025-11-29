@@ -1,11 +1,11 @@
 import React, { useState, useRef } from 'react';
 import { useParams, useNavigate, Link } from 'react-router-dom';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
-import { useAuth } from '@/context/AuthContext';
-import { useToast } from '@/hooks/use-toast';
-import { grievanceApi } from '@/services/api';
-import { GrievanceStatus } from '@/services/grievanceService';
-import MainLayout from '@/components/Layout/MainLayout';
+import { useAuth } from '../context/AuthContext';
+import { useToast } from '../hooks/use-toast';
+import { grievanceApi } from '../services/api';
+import type { GrievanceStatus } from '../services/grievanceService';
+import MainLayout from '../components/Layout/MainLayout';
 import { 
   ArrowLeft, 
   MessageSquare, 
