@@ -1,9 +1,9 @@
 import React from 'react';
 import { Link, Navigate } from 'react-router-dom';
-import MainLayout from '@/components/Layout/MainLayout';
-import { Button } from '@/components/ui/button';
+import MainLayout from '../components/Layout/MainLayout';
+import { Button } from '../components/ui/button';
 import { FileText, CheckCircle, MessageSquare, Search } from 'lucide-react';
-import { useAuth } from '@/context/AuthContext';
+import { useAuth } from '../context/AuthContext';
 
 const Homepage = () => {
   const { user, login, isLoading, error: authError } = useAuth();
