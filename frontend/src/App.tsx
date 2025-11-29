@@ -10,11 +10,11 @@ import Homepage from "./pages/Homepage";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import Dashboard from "./pages/Dashboard";
+import GrievanceList from "./pages/GrievanceList"; 
+import GrievanceForm from "./pages/GrievanceForm";
+import GrievanceDetail from "./pages/GrievanceDetail";
+import GrievanceTrack from "./pages/GrievanceTrack";
 
-// import GrievanceList from "./pages/GrievanceList"; 
-// import GrievanceForm from "./pages/GrievanceForm";
-// import GrievanceDetail from "./pages/GrievanceDetail";
-// import GrievanceTrack from "./pages/GrievanceTrack";
 // import Unauthorized from "./pages/Unauthorized";
 // import NotFound from "./pages/NotFound";
 // import UserList from "./pages/UserList";
@@ -40,6 +40,10 @@ const App = () => (
             
             {/* Catch-all for 404s */}
             <Route path="*" element={<Navigate to="/" replace />} />
+            <Route path="/grievances" element={<GrievanceList />} />
+            <Route path="/grievances/new" element={<GrievanceForm />} />
+            <Route path="/grievances/:id" element={<GrievanceDetail />} />
+            <Route path="/grievances/track" element={<GrievanceTrack />} />
           </Routes>
         </BrowserRouter>
       </TooltipProvider>
